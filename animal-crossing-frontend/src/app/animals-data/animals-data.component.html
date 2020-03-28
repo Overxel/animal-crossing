@@ -1,0 +1,51 @@
+<mat-form-field>
+    <mat-label>Filter</mat-label>
+    <input matInput (keyup)="applyFilter($event)" placeholder="Rodaballo">
+</mat-form-field>
+
+<div class="mat-elevation-z8">
+    <table mat-table [dataSource]="animalsData" matSort>
+
+
+        <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Nombre </th>
+            <td mat-cell *matCellDef="let row"> {{row.nombre}} </td>
+        </ng-container>
+
+
+        <ng-container matColumnDef="price">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Precio </th>
+            <td mat-cell *matCellDef="let row"> {{row.price}} </td>
+        </ng-container>
+
+
+        <ng-container matColumnDef="habitat">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Hábitat </th>
+            <td mat-cell *matCellDef="let row"> {{row.habitat}} </td>
+        </ng-container>
+
+
+        <ng-container matColumnDef="months">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Meses </th>
+            <td mat-cell *matCellDef="let row">
+                <p *ngFor="let month of row.schedule.months"> month </p>
+            </td>
+        </ng-container>
+
+
+        <ng-container matColumnDef="time">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Color </th>
+            <td mat-cell *matCellDef="let row"> {{row.timeFrom}} - {{row.schedule.timeTo}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="weather">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Color </th>
+            <td mat-cell *matCellDef="let row" [style.color]="row.color"> {{row.weather}} </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+
+    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+</div>
