@@ -11,9 +11,7 @@ import { StoreService } from '../services/store.service';
   templateUrl: './animals-data.component.html',
   styleUrls: ['./animals-data.component.css']
 })
-export class AnimalsDataComponent implements OnInit, OnDestroy {
-  animals: Animal[];
-  
+export class AnimalsDataComponent implements OnInit, OnDestroy {  
   displayedColumns: string[] = ['name', 'price', 'habitat', 'months', 'time', 'weather'];
   animalsData: MatTableDataSource<Animal>;
   subscriber: Subject<void>;
@@ -22,13 +20,10 @@ export class AnimalsDataComponent implements OnInit, OnDestroy {
   @ViewChild(MatSort, { static: true }) sort: MatSort;
 
 
-  constructor(private storeService: StoreService) {
-    this.animalsData = new MatTableDataSource(this.animals);
-  }
+  constructor(private storeService: StoreService) {}
 
   ngOnInit() {
-    this.animalsData.paginator = this.paginator;
-    this.animalsData.sort = this.sort;
+    this.getAnimals();
   }
 
   ngOnDestroy() {
@@ -47,8 +42,10 @@ export class AnimalsDataComponent implements OnInit, OnDestroy {
 
   getAnimals(){
     this.storeService.animals.subscribe(animals => {
-      this.animals = animals;
-    })
+      this.animalsData = new MatTableDataSource(animals);
+      this.animalsData.paginator = this.paginator;
+      this.animalsData.sort = this.sort;
+    });
   }
 
 }

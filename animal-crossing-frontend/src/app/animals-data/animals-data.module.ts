@@ -8,7 +8,7 @@ import { MatSortModule } from '@angular/material/sort';
 import {MatInputModule} from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
-
+import {MatButtonModule} from '@angular/material/button';
 
 
 @NgModule({
@@ -21,7 +21,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     MatSortModule,
     MatInputModule,
     MatSelectModule,
-    MatFormFieldModule
+    MatFormFieldModule,
+    MatButtonModule
   ]
 })
 export class AnimalsDataModule { }
